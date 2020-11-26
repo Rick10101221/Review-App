@@ -1,21 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { AppLoading } from 'expo';
+import { useFonts } from 'expo-font'
+import {
+  EBGaramond_400Regular,
+} from '@expo-google-fonts/eb-garamond';
+import Home from './pages/home';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+export default () => {
+  let [fontsLoaded] = useFonts({
+    EBGaramond_400Regular,
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <View>
+        <Home />
+        <Text style={{ fontFamily: 'EBGaramond_400Regular' }}>
+          EB Garamond Regular
+        </Text>
+      </View>
+    );
+  }
+};
